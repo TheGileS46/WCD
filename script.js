@@ -1,80 +1,62 @@
+// Esperar a que el DOM esté completamente cargado
+document.addEventListener('DOMContentLoaded', () => {
 
-window.addEventListener('scroll', function() {
-  const header = document.getElementById('header');
-  if (window.scrollY > 50) header.classList.add('header-scrolled');
-  else header.classList.remove('header-scrolled');
-});
+    // 1. Efecto de aparición al hacer scroll (Scroll Reveal)
+    const revealElements = document.querySelectorAll('.reveal');
 
-const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
-const observer = new IntersectionObserver(function(entries) {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.style.opacity = '1';
-      entry.target.style.transform = 'translateY(0)';
+    const revealOnScroll = () => {
+        const windowHeight = window.innerHeight;
+        const revealPoint = 150; // Punto en pixeles antes de aparecer
+
+        revealElements.forEach(element => {
+            const elementTop = element.getBoundingClientRect().top;
+
+            if (elementTop < windowHeight - revealPoint) {
+                element.classList.add('active');
+            }
+        });
+    };
+
+    // Ejecutar una vez al cargar para elementos ya visibles
+    revealOnScroll();
+
+    // Ejecutar cada vez que se hace scroll
+    window.addEventListener('scroll', revealOnScroll);
+
+
+    // 2. Animación del Navbar al hacer scroll
+    const navbar = document.getElementById('navbar');
+
+    const handleNavbarScroll = () => {
+        if (window.scrollY > 50) {
+            navbar.classList.add('shadow-2xl', 'bg-wcd-darkest/95');
+            navbar.classList.remove('bg-wcd-darkest/95', 'backdrop-blur-md');
+        } else {
+            navbar.classList.remove('shadow-2xl', 'bg-wcd-darkest/95');
+            navbar.classList.add('bg-wcd-darkest/95', 'backdrop-blur-md');
+        }
+    };
+
+    window.addEventListener('scroll', handleNavbarScroll);
+
+
+    // 3. Efecto de parpadeo sutil para el Ocelote en el Hero
+    const oceloteHero = document.querySelector('#inicio img');
+
+    if (oceloteHero) {
+        let opacity = 0.95;
+        let increasing = false;
+
+        setInterval(() => {
+            if (increasing) {
+                opacity += 0.005;
+                if (opacity >= 0.98) increasing = false;
+            } else {
+                opacity -= 0.005;
+                if (opacity <= 0.92) increasing = true;
+            }
+            oceloteHero.style.opacity = opacity;
+        }, 50); // Velocidad del parpadeo
     }
-  });
-}, observerOptions);
 
-const contactModal = document.getElementById('contactModal');
-const openContactModal = document.getElementById('openContactModal');
-const closeContactModal = document.getElementById('closeContactModal');
-
-openContactModal.addEventListener('click', () => contactModal.classList.add('active'));
-closeContactModal.addEventListener('click', () => contactModal.classList.remove('active'));
-contactModal.addEventListener('click', e => { if (e.target === contactModal) contactModal.classList.remove('active'); });
-
-document.addEventListener('DOMContentLoaded', function() {
-  const animatedElements = document.querySelectorAll('.section-title, .service-card, .mv-card');
-  animatedElements.forEach(el => observer.observe(el));
-
-  // Formulario principal
-  document.getElementById('contactForm').addEventListener('submit', async function(e) {
-    e.preventDefault();
-    const form = e.target;
-    const response = await fetch('https://formspree.io/f/myzbbvoo', {
-      method: 'POST',
-      body: new FormData(form),
-      headers: { 'Accept': 'application/json' }
-    });
-    if (response.ok) {
-      Swal.fire({
-        icon: 'success',
-        title: '¡Excelente!',
-        text: 'Hemos recibido tu propuesta. Te contactaremos dentro de las próximas 24 horas.'
-      });
-      form.reset();
-    } else {
-      Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: 'No se pudo enviar el mensaje. Intenta de nuevo más tarde.'
-      });
-    }
-  });
-
-  // Formulario rápido (modal)
-  document.getElementById('quickContactForm').addEventListener('submit', async function(e) {
-    e.preventDefault();
-    const form = e.target;
-    const response = await fetch('https://formspree.io/f/mvgvvyyg', {
-      method: 'POST',
-      body: new FormData(form),
-      headers: { 'Accept': 'application/json' }
-    });
-    if (response.ok) {
-      Swal.fire({
-        icon: 'success',
-        title: '¡Perfecto!',
-        text: 'Te enviaremos una cotización con el 15% de descuento en menos de 2 horas.'
-      });
-      form.reset();
-      contactModal.classList.remove('active');
-    } else {
-      Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: 'No se pudo enviar el mensaje. Intenta de nuevo más tarde.'
-      });
-    }
-  });
 });
