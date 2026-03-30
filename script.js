@@ -1,62 +1,84 @@
-// Esperar a que el DOM esté completamente cargado
-document.addEventListener('DOMContentLoaded', () => {
 
-    // 1. Efecto de aparición al hacer scroll (Scroll Reveal)
-    const revealElements = document.querySelectorAll('.reveal');
+        document.addEventListener('DOMContentLoaded', () => {
 
-    const revealOnScroll = () => {
-        const windowHeight = window.innerHeight;
-        const revealPoint = 150; // Punto en pixeles antes de aparecer
+            // --- Lógica del Menú Móvil ---
+            const hamburgerBtn = document.getElementById('hamburger-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+            const body = document.body;
 
-        revealElements.forEach(element => {
-            const elementTop = element.getBoundingClientRect().top;
+            function toggleMenu() {
+                const isOpen = mobileMenu.classList.contains('menu-open');
+                
+                if (isOpen) {
+                    mobileMenu.classList.remove('menu-open');
+                    mobileMenu.classList.add('menu-closed');
+                    body.style.overflow = 'auto'; // Restaurar scroll
+                    hamburgerBtn.innerHTML = '<i class="fas fa-bars text-3xl"></i>';
+                } else {
+                    mobileMenu.classList.remove('menu-closed');
+                    mobileMenu.classList.add('menu-open');
+                    body.style.overflow = 'hidden'; // Bloquear scroll de fondo
+                    hamburgerBtn.innerHTML = '<i class="fas fa-times text-4xl text-wcd-orange"></i>';
+                }
+            }
 
-            if (elementTop < windowHeight - revealPoint) {
-                element.classList.add('active');
+            hamburgerBtn.addEventListener('click', toggleMenu);
+
+            // Cerrar menú al hacer clic en un enlace
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', toggleMenu);
+            });
+
+
+            // --- Animaciones Scroll Reveal ---
+            const revealElements = document.querySelectorAll('.reveal');
+
+            const revealOnScroll = () => {
+                const windowHeight = window.innerHeight;
+                const revealPoint = 100; // Punto de quiebre responsivo
+
+                revealElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    if (elementTop < windowHeight - revealPoint) {
+                        element.classList.add('active');
+                    }
+                });
+            };
+
+            revealOnScroll(); // Trigger inicial
+            window.addEventListener('scroll', revealOnScroll);
+
+
+            // --- Navbar Shadow on Scroll ---
+            const navbar = document.getElementById('navbar');
+            const handleNavbarScroll = () => {
+                if (window.scrollY > 20) {
+                    navbar.classList.add('shadow-2xl', 'bg-wcd-darkest');
+                    navbar.classList.remove('bg-wcd-darkest/95', 'backdrop-blur-md');
+                } else {
+                    navbar.classList.remove('shadow-2xl', 'bg-wcd-darkest');
+                    navbar.classList.add('bg-wcd-darkest/95', 'backdrop-blur-md');
+                }
+            };
+            window.addEventListener('scroll', handleNavbarScroll);
+
+
+            // --- Efecto Parpadeo Ocelote Hero ---
+            const oceloteHero = document.getElementById('hero-ocelote');
+            if (oceloteHero) {
+                let opacity = 0.95;
+                let increasing = false;
+
+                setInterval(() => {
+                    if (increasing) {
+                        opacity += 0.005;
+                        if (opacity >= 0.98) increasing = false;
+                    } else {
+                        opacity -= 0.005;
+                        if (opacity <= 0.85) increasing = true; // Rango más visible en móvil
+                    }
+                    oceloteHero.style.opacity = opacity;
+                }, 50); 
             }
         });
-    };
-
-    // Ejecutar una vez al cargar para elementos ya visibles
-    revealOnScroll();
-
-    // Ejecutar cada vez que se hace scroll
-    window.addEventListener('scroll', revealOnScroll);
-
-
-    // 2. Animación del Navbar al hacer scroll
-    const navbar = document.getElementById('navbar');
-
-    const handleNavbarScroll = () => {
-        if (window.scrollY > 50) {
-            navbar.classList.add('shadow-2xl', 'bg-wcd-darkest/95');
-            navbar.classList.remove('bg-wcd-darkest/95', 'backdrop-blur-md');
-        } else {
-            navbar.classList.remove('shadow-2xl', 'bg-wcd-darkest/95');
-            navbar.classList.add('bg-wcd-darkest/95', 'backdrop-blur-md');
-        }
-    };
-
-    window.addEventListener('scroll', handleNavbarScroll);
-
-
-    // 3. Efecto de parpadeo sutil para el Ocelote en el Hero
-    const oceloteHero = document.querySelector('#inicio img');
-
-    if (oceloteHero) {
-        let opacity = 0.95;
-        let increasing = false;
-
-        setInterval(() => {
-            if (increasing) {
-                opacity += 0.005;
-                if (opacity >= 0.98) increasing = false;
-            } else {
-                opacity -= 0.005;
-                if (opacity <= 0.92) increasing = true;
-            }
-            oceloteHero.style.opacity = opacity;
-        }, 50); // Velocidad del parpadeo
-    }
-
-});

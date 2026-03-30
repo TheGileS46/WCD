@@ -16,12 +16,12 @@
             theme: {
                 extend: {
                     colors: {
-                        'wcd-darkest': '#16425B', // Fondo principal oscuro
-                        'wcd-dark': '#2F6690',    // Secundario
-                        'wcd-medium': '#3A7CA5',  // Detalles
-                        'wcd-light': '#81C3D7',   // Acentos claros
-                        'wcd-neutral': '#D9DCD6', // Fondo claro
-                        'wcd-orange': '#fb8500',  // Acción / Conversión
+                        'wcd-darkest': '#16425B', 
+                        'wcd-dark': '#2F6690',    
+                        'wcd-medium': '#3A7CA5',  
+                        'wcd-light': '#81C3D7',   
+                        'wcd-neutral': '#D9DCD6', 
+                        'wcd-orange': '#fb8500',  
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
@@ -48,7 +48,7 @@
         .gradient-border {
             border-image: linear-gradient(to bottom, #2F6690, #fb8500) 1;
         }
-        /* Animaciones para el script */
+        /* Animaciones Scroll */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
@@ -58,24 +58,42 @@
             opacity: 1;
             transform: translateY(0);
         }
+        /* Menú Móvil Transiciones */
+        #mobile-menu {
+            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+        }
+        #mobile-menu.menu-open {
+            opacity: 1;
+            visibility: visible;
+        }
+        #mobile-menu.menu-closed {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
     </style>
 </head>
 <body class="text-wcd-neutral font-sans antialiased overflow-x-hidden">
 
     <nav class="fixed w-full z-50 transition-all duration-300 bg-wcd-darkest/95 backdrop-blur-md shadow-2xl border-b border-wcd-dark/30" id="navbar">
-        <div class="max-w-7xl mx-auto px-6 py-1">
-            <div class="flex justify-between items-center h-20">
-                <div class="flex-shrink-0 flex items-center gap-4">
-                    <img src="ocelote.png" alt="Logo Ocelote" class="h-14 w-auto filter invert brightness-0 drop-shadow-[0_0_15px_rgba(251,133,0,0.5)]">
-                    <span class="font-black text-white text-3xl tracking-tighter">WCD<span class="text-wcd-orange">.</span></span>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 md:py-1">
+            <div class="flex justify-between items-center h-16 md:h-20">
+                <div class="flex-shrink-0 flex items-center gap-2 md:gap-4 relative z-50">
+                    <img src="ocelote.png" alt="Logo Ocelote" class="h-10 md:h-14 w-auto filter invert brightness-0 drop-shadow-[0_0_15px_rgba(251,133,0,0.5)]">
+                    <span class="font-black text-white text-2xl md:text-3xl tracking-tighter">WCD<span class="text-wcd-orange">.</span></span>
                 </div>
-                <div class="hidden md:flex space-x-10 items-center">
+                
+                <button id="hamburger-btn" class="md:hidden text-white hover:text-wcd-orange focus:outline-none relative z-50 p-2 transition-colors">
+                    <i class="fas fa-bars text-3xl"></i>
+                </button>
+
+                <div class="hidden md:flex space-x-8 lg:space-x-10 items-center">
                     <a href="#inicio" class="text-wcd-neutral hover:text-wcd-light transition-colors font-semibold tracking-wide text-sm uppercase">Inicio</a>
                     <a href="#filosofia" class="text-wcd-neutral hover:text-wcd-light transition-colors font-semibold tracking-wide text-sm uppercase">Filosofía</a>
                     <a href="#nellipos" class="text-wcd-neutral hover:text-wcd-light transition-colors font-semibold tracking-wide text-sm uppercase">NelliPos</a>
                     <a href="#portafolio" class="text-wcd-neutral hover:text-wcd-light transition-colors font-semibold tracking-wide text-sm uppercase">Casos de Éxito</a>
                     <a href="#servicios" class="text-wcd-neutral hover:text-wcd-light transition-colors font-semibold tracking-wide text-sm uppercase">Servicios</a>
-                    <a href="https://wa.me/523324311250?text=Hola,%20me%20gustaría%20una%20cotización" target="_blank" class="bg-wcd-orange hover:bg-orange-600 text-white px-8 py-3 rounded-full font-extrabold transition-all transform hover:scale-105 shadow-2xl text-glow">
+                    <a href="https://wa.me/523324311250?text=Hola,%20me%20gustaría%20una%20cotización" target="_blank" class="bg-wcd-orange hover:bg-orange-600 text-white px-6 lg:px-8 py-2 lg:py-3 rounded-full font-extrabold transition-all transform hover:scale-105 shadow-2xl text-glow text-sm lg:text-base">
                         ¡Cotiza Ya!
                     </a>
                 </div>
@@ -83,229 +101,243 @@
         </div>
     </nav>
 
-    <section id="inicio" class="hero-pattern min-h-screen flex items-center pt-20 relative">
+    <div id="mobile-menu" class="menu-closed fixed inset-0 z-40 bg-wcd-darkest/95 backdrop-blur-xl flex flex-col justify-center items-center">
+        <div class="flex flex-col space-y-8 text-center w-full px-6">
+            <a href="#inicio" class="mobile-link text-white text-3xl font-black uppercase tracking-widest hover:text-wcd-orange transition-colors ancient">Inicio</a>
+            <a href="#filosofia" class="mobile-link text-white text-3xl font-black uppercase tracking-widest hover:text-wcd-orange transition-colors ancient">Filosofía</a>
+            <a href="#nellipos" class="mobile-link text-white text-3xl font-black uppercase tracking-widest hover:text-wcd-orange transition-colors ancient">NelliPos</a>
+            <a href="#portafolio" class="mobile-link text-white text-3xl font-black uppercase tracking-widest hover:text-wcd-orange transition-colors ancient">Portafolio</a>
+            <a href="#servicios" class="mobile-link text-white text-3xl font-black uppercase tracking-widest hover:text-wcd-orange transition-colors ancient">Servicios</a>
+            <a href="https://wa.me/523324311250?text=Hola,%20me%20gustaría%20una%20cotización" target="_blank" class="mobile-link mt-8 bg-wcd-orange text-white px-8 py-4 rounded-full font-extrabold text-xl shadow-[0_0_30px_rgba(251,133,0,0.4)]">
+                ¡Cotiza Ya!
+            </a>
+        </div>
+    </div>
+
+    <section id="inicio" class="hero-pattern min-h-screen flex items-center pt-24 md:pt-20 relative overflow-hidden">
         <div class="stone-texture absolute inset-0"></div>
-        <div class="max-w-7xl mx-auto px-6 lg:px-8 text-center md:text-left flex flex-col md:flex-row items-center gap-16 relative z-10">
-            <div class="md:w-3/5 text-white">
-                <h1 class="text-6xl lg:text-8xl font-black tracking-tighter leading-none mb-8 text-glow">
-                    Transformamos tu visión en <br>
-                    <span class="text-wcd-light ancient">Soluciones Digitales Robustas.</span>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center md:text-left flex flex-col md:flex-row items-center gap-10 md:gap-16 relative z-10 py-10">
+            <div class="md:w-3/5 text-white order-2 md:order-1 mt-8 md:mt-0">
+                <h1 class="text-5xl sm:text-6xl lg:text-8xl font-black tracking-tighter leading-tight md:leading-none mb-6 md:mb-8 text-glow">
+                    Transformamos tu visión en <br class="hidden sm:block">
+                    <span class="text-wcd-light ancient block mt-2 md:mt-0">Soluciones Digitales Robustas.</span>
                 </h1>
-                <p class="text-2xl text-wcd-neutral mb-12 font-light leading-relaxed max-w-3xl">
-                    Desarrollamos software honesto, real e intuitivo que opera con la fuerza y precisión de un Ocelote. Olvídate de la complejidad, nosotros diseñamos el futuro de tu operación.
+                <p class="text-lg sm:text-xl md:text-2xl text-wcd-neutral mb-8 md:mb-12 font-light leading-relaxed max-w-3xl mx-auto md:mx-0">
+                    Desarrollamos software honesto, real e intuitivo que opera con la fuerza y precisión de un Ocelote. Diseñamos el futuro de tu operación.
                 </p>
-                <div class="flex flex-col sm:flex-row gap-6 justify-center md:justify-start">
-                    <a href="#nellipos" class="bg-wcd-medium hover:bg-wcd-dark text-white px-10 py-5 rounded-xl font-bold transition-all text-center border-2 border-wcd-light/20 shadow-xl text-glow">
+                <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center md:justify-start w-full px-4 sm:px-0">
+                    <a href="#nellipos" class="w-full sm:w-auto bg-wcd-medium hover:bg-wcd-dark text-white px-8 md:px-10 py-4 md:py-5 rounded-xl font-bold transition-all text-center border-2 border-wcd-light/20 shadow-xl text-glow text-lg">
                         Conoce NelliPos
                     </a>
-                    <a href="https://wa.me/523324311250?text=Hola,%20busco%20desarrollo%20a%20medida" target="_blank" class="bg-wcd-orange hover:bg-orange-600 text-white px-10 py-5 rounded-xl font-extrabold transition-all text-center shadow-2xl flex items-center justify-center gap-3 transform hover:scale-105">
+                    <a href="https://wa.me/523324311250?text=Hola,%20busco%20desarrollo%20a%20medida" target="_blank" class="w-full sm:w-auto bg-wcd-orange hover:bg-orange-600 text-white px-8 md:px-10 py-4 md:py-5 rounded-xl font-extrabold transition-all text-center shadow-2xl flex items-center justify-center gap-3 transform hover:scale-105 text-lg">
                         <i class="fab fa-whatsapp text-2xl"></i> (33) 2431 1250
                     </a>
                 </div>
             </div>
-            <div class="md:w-2/5 flex justify-center relative">
-                <div class="absolute inset-0 bg-wcd-light/5 rounded-full filter blur-3xl opacity-50 scale-125"></div>
-                <img src="ocelote.png" alt="Ocelote Guardián de Código" class="w-full max-w-xl filter invert brightness-0 drop-shadow-[0_0_60px_rgba(251,133,0,0.6)] opacity-95 relative z-10">
+            <div class="w-4/5 sm:w-2/3 md:w-2/5 flex justify-center relative order-1 md:order-2">
+                <div class="absolute inset-0 bg-wcd-light/10 rounded-full filter blur-3xl opacity-50 scale-125"></div>
+                <img src="ocelote.png" alt="Ocelote Guardián" class="w-full max-w-xs md:max-w-xl filter invert brightness-0 drop-shadow-[0_0_40px_rgba(251,133,0,0.6)] opacity-95 relative z-10" id="hero-ocelote">
             </div>
         </div>
     </section>
 
-    <section id="filosofia" class="py-24 bg-white relative">
+    <section id="filosofia" class="py-16 md:py-24 bg-white relative">
         <div class="stone-texture absolute inset-0 opacity-10"></div>
-        <div class="max-w-7xl mx-auto px-6 lg:px-8 text-center relative z-10">
-            <h2 class="text-sm font-bold text-wcd-orange tracking-widest uppercase mb-3 ancient">Nuestra Identidad Cultural</h2>
-            <h3 class="text-5xl font-black text-wcd-darkest mb-16 leading-tight">La Fuerza de Nuestra Filosofía</h3>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <h2 class="text-xs md:text-sm font-bold text-wcd-orange tracking-widest uppercase mb-2 md:mb-3 ancient">Identidad Cultural</h2>
+            <h3 class="text-4xl md:text-5xl font-black text-wcd-darkest mb-12 md:mb-16 leading-tight">La Fuerza de Nuestra Filosofía</h3>
             
-            <div class="grid md:grid-cols-3 gap-10">
-                <div class="reveal group bg-wcd-neutral/50 p-10 rounded-3xl hover:shadow-2xl transition-all border-t-8 border-wcd-dark stone-texture hover:-translate-y-2">
-                    <div class="w-20 h-20 bg-wcd-dark text-white rounded-full flex items-center justify-center text-3xl mx-auto mb-8 shadow-lg group-hover:scale-110 transition-transform">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 md:gap-10">
+                <div class="reveal group bg-wcd-neutral/50 p-8 md:p-10 rounded-3xl hover:shadow-2xl transition-all border-t-8 border-wcd-dark stone-texture hover:-translate-y-2">
+                    <div class="w-16 h-16 md:w-20 md:h-20 bg-wcd-dark text-white rounded-full flex items-center justify-center text-2xl md:text-3xl mx-auto mb-6 md:mb-8 shadow-lg group-hover:scale-110 transition-transform">
                         <i class="fas fa-hammer"></i>
                     </div>
-                    <h4 class="text-3xl font-bold text-wcd-darkest mb-3 ancient">Tekiti</h4>
-                    <p class="text-xl text-gray-700 font-semibold mb-5">El Trabajo</p>
-                    <p class="text-gray-600 leading-relaxed font-light">El esfuerzo constante y la dedicación total. Es nuestra promesa de "hacer que las cosas pasen" con precisión y pasión.</p>
+                    <h4 class="text-2xl md:text-3xl font-bold text-wcd-darkest mb-2 md:mb-3 ancient">Tekiti</h4>
+                    <p class="text-lg md:text-xl text-gray-700 font-semibold mb-3 md:mb-5">El Trabajo</p>
+                    <p class="text-gray-600 leading-relaxed font-light text-sm md:text-base">El esfuerzo constante y la dedicación total. Es nuestra promesa de "hacer que las cosas pasen" con precisión y pasión.</p>
                 </div>
-                <div class="reveal delay-200 group bg-wcd-neutral/50 p-10 rounded-3xl hover:shadow-2xl transition-all border-t-8 border-wcd-medium stone-texture hover:-translate-y-2">
-                    <div class="w-20 h-20 bg-wcd-medium text-white rounded-full flex items-center justify-center text-3xl mx-auto mb-8 shadow-lg group-hover:scale-110 transition-transform">
+                <div class="reveal delay-100 md:delay-200 group bg-wcd-neutral/50 p-8 md:p-10 rounded-3xl hover:shadow-2xl transition-all border-t-8 border-wcd-medium stone-texture hover:-translate-y-2">
+                    <div class="w-16 h-16 md:w-20 md:h-20 bg-wcd-medium text-white rounded-full flex items-center justify-center text-2xl md:text-3xl mx-auto mb-6 md:mb-8 shadow-lg group-hover:scale-110 transition-transform">
                         <i class="fas fa-eye"></i>
                     </div>
-                    <h4 class="text-3xl font-bold text-wcd-darkest mb-3 ancient">Tonalli</h4>
-                    <p class="text-xl text-gray-700 font-semibold mb-5">La Visión</p>
-                    <p class="text-gray-600 leading-relaxed font-light">La cabeza fría y la ambición estratégica mezcladas para diseñar el futuro tecnológico de tu operación.</p>
+                    <h4 class="text-2xl md:text-3xl font-bold text-wcd-darkest mb-2 md:mb-3 ancient">Tonalli</h4>
+                    <p class="text-lg md:text-xl text-gray-700 font-semibold mb-3 md:mb-5">La Visión</p>
+                    <p class="text-gray-600 leading-relaxed font-light text-sm md:text-base">La cabeza fría y la ambición estratégica mezcladas para diseñar el futuro tecnológico de tu operación.</p>
                 </div>
-                <div class="reveal delay-400 group bg-wcd-neutral/50 p-10 rounded-3xl hover:shadow-2xl transition-all border-t-8 border-wcd-orange stone-texture hover:-translate-y-2">
-                    <div class="w-20 h-20 bg-wcd-orange text-white rounded-full flex items-center justify-center text-3xl mx-auto mb-8 shadow-lg group-hover:scale-110 transition-transform">
+                <div class="reveal delay-200 md:delay-400 group bg-wcd-neutral/50 p-8 md:p-10 rounded-3xl hover:shadow-2xl transition-all border-t-8 border-wcd-orange stone-texture hover:-translate-y-2 sm:col-span-2 md:col-span-1 sm:w-1/2 md:w-full mx-auto">
+                    <div class="w-16 h-16 md:w-20 md:h-20 bg-wcd-orange text-white rounded-full flex items-center justify-center text-2xl md:text-3xl mx-auto mb-6 md:mb-8 shadow-lg group-hover:scale-110 transition-transform">
                         <i class="fas fa-check-circle"></i>
                     </div>
-                    <h4 class="text-3xl font-bold text-wcd-darkest mb-3 ancient">Nelli</h4>
-                    <p class="text-xl text-gray-700 font-semibold mb-5">Lo Auténtico</p>
-                    <p class="text-gray-600 leading-relaxed font-light">El resultado final. Software honesto, real, intuitivo y bien hecho, que perdura y da resultados.</p>
+                    <h4 class="text-2xl md:text-3xl font-bold text-wcd-darkest mb-2 md:mb-3 ancient">Nelli</h4>
+                    <p class="text-lg md:text-xl text-gray-700 font-semibold mb-3 md:mb-5">Lo Auténtico</p>
+                    <p class="text-gray-600 leading-relaxed font-light text-sm md:text-base">El resultado final. Software honesto, real, intuitivo y bien hecho, que perdura y da resultados.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="nellipos" class="py-24 bg-wcd-dark relative overflow-hidden">
+    <section id="nellipos" class="py-16 md:py-24 bg-wcd-dark relative overflow-hidden">
         <div class="hero-pattern absolute inset-0 opacity-10"></div>
         <div class="stone-texture absolute inset-0 opacity-5"></div>
-        <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-            <div class="flex flex-col-reverse md:flex-row items-center gap-16">
-                <div class="md:w-1/2 reveal">
-                    <div class="bg-wcd-darkest p-10 rounded-3xl shadow-3xl border border-wcd-medium/40 relative overflow-hidden group">
-                        <img src="ocelote.png" class="absolute -right-16 -bottom-16 w-80 opacity-5 filter invert brightness-0 transition-opacity group-hover:opacity-10" alt="">
-                        
-                        <h4 class="text-wcd-orange font-bold tracking-widest uppercase text-sm mb-3 ancient">El Guardián de tu Tienda</h4>
-                        <h3 class="text-5xl font-black mb-8 leading-tight">NelliPos: Control y Fuerza</h3>
-                        <p class="text-wcd-neutral text-xl mb-10 leading-relaxed font-light">
-                            Un sistema diseñado para el sector abarrotero que rompe con la complejidad. Ofrecemos el software intuitivo que tu operación necesita, con el respaldo humano que la competencia ignora.
-                        </p>
-                        <ul class="space-y-6 mb-12 text-lg">
-                            <li class="flex items-center gap-4 reveal delay-100">
-                                <i class="fas fa-bolt text-2xl text-wcd-orange drop-shadow-lg"></i>
-                                <span class="font-semibold text-white">100% Intuitivo y Rápido</span>
-                            </li>
-                            <li class="flex items-center gap-4 reveal delay-200">
-                                <i class="fas fa-users text-2xl text-wcd-orange drop-shadow-lg"></i>
-                                <span class="font-semibold text-white">Acompañamiento presencial total</span>
-                            </li>
-                            <li class="flex items-center gap-4 reveal delay-300">
-                                <i class="fas fa-mobile-alt text-2xl text-wcd-orange drop-shadow-lg"></i>
-                                <span class="font-semibold text-white">Control en tiempo real de tu stock</span>
-                            </li>
-                        </ul>
-                        <div class="text-center bg-wcd-medium/20 p-6 rounded-2xl border border-wcd-light/20 relative">
-                            <p class="italic text-xl font-medium text-wcd-light">"No estás solo, tienes a NELLI"</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="md:w-1/2 reveal">
-                    <h2 class="text-6xl font-black mb-8 leading-none tracking-tighter">Olvídate de sistemas enredosos.</h2>
-                    <p class="text-2xl text-wcd-light mb-10 leading-relaxed font-light">
-                        A diferencia de los "sistemas gringos" que venden y abandonan, Nelli es capacitación in-situ, resolución inmediata y soporte humano real. Es el guardián tecnológico que tu negocio merece.
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="flex flex-col md:flex-row items-center gap-12 md:gap-16">
+                <div class="md:w-1/2 reveal order-1 md:order-2 text-center md:text-left">
+                    <h2 class="text-4xl sm:text-5xl md:text-6xl font-black mb-6 md:mb-8 leading-tight tracking-tighter text-white">Olvídate de sistemas enredosos.</h2>
+                    <p class="text-lg md:text-2xl text-wcd-light mb-8 md:mb-10 leading-relaxed font-light">
+                        A diferencia de la competencia que vende y abandona, Nelli es capacitación in-situ, resolución inmediata y soporte humano real. El guardián que tu negocio merece.
                     </p>
-                    <a href="https://wa.me/523324311250?text=Hola,%20quiero%20conocer%20NelliPos" target="_blank" class="inline-block bg-wcd-orange text-white hover:bg-orange-600 px-10 py-5 rounded-full font-extrabold transition-all shadow-2xl text-glow transform hover:scale-105">
+                    <a href="https://wa.me/523324311250?text=Hola,%20quiero%20conocer%20NelliPos" target="_blank" class="w-full sm:w-auto inline-block bg-wcd-orange text-white hover:bg-orange-600 px-8 py-4 md:px-10 md:py-5 rounded-full font-extrabold transition-all shadow-2xl text-glow transform hover:scale-105 text-lg">
                         Agendar Demo de Prueba
                     </a>
                 </div>
-            </div>
-        </div>
-    </section>
 
-    <section id="portafolio" class="py-24 bg-wcd-neutral relative">
-        <div class="stone-texture absolute inset-0 opacity-10"></div>
-        <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-            <div class="text-center mb-16">
-                <h2 class="text-sm font-bold text-wcd-dark tracking-widest uppercase mb-3 ancient">Desarrollo a Medida</h2>
-                <h3 class="text-5xl font-black text-wcd-darkest">Historias de Éxito y Robustez</h3>
-            </div>
-
-            <div class="grid md:grid-cols-2 gap-12">
-                <div class="reveal bg-white rounded-3xl overflow-hidden shadow-2xl border border-gray-100 hover:shadow-3xl transition-all group hover:-translate-y-1">
-                    <div class="h-56 bg-wcd-darkest relative flex items-center justify-center p-8 overflow-hidden">
-                        <div class="absolute inset-0 bg-wcd-light/10 opacity-40 stone-texture"></div>
-                        <h4 class="text-4xl font-black text-white z-10 tracking-tight text-glow">Proyecto Admitido</h4>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-                    </div>
-                    <div class="p-10">
-                        <div class="flex items-center gap-3 mb-6">
-                            <span class="px-4 py-2 bg-wcd-light/30 text-wcd-dark text-xs font-extrabold rounded-full tracking-wider uppercase">E-Learning</span>
-                            <span class="px-4 py-2 bg-green-100 text-green-700 text-xs font-extrabold rounded-full tracking-wider uppercase">Mercado Pago</span>
-                        </div>
-                        <p class="text-gray-600 text-lg leading-relaxed mb-8 font-light">
-                            Una plataforma educativa integral con gestión académica total. Incluye pagos en línea por Mercado Pago, administración de lecciones, materias, alumnos y estadísticas detalladas. Un entorno intuitivo donde los estudiantes acceden a su material 24/7.
+                <div class="md:w-1/2 reveal order-2 md:order-1 w-full">
+                    <div class="bg-wcd-darkest p-8 md:p-10 rounded-3xl shadow-2xl border border-wcd-medium/40 relative overflow-hidden group">
+                        <img src="ocelote.png" class="absolute -right-10 -bottom-10 w-48 md:-right-16 md:-bottom-16 md:w-80 opacity-5 filter invert brightness-0 transition-opacity group-hover:opacity-10 pointer-events-none" alt="">
+                        
+                        <h4 class="text-wcd-orange font-bold tracking-widest uppercase text-xs md:text-sm mb-2 md:mb-3 ancient">El Guardián de tu Tienda</h4>
+                        <h3 class="text-3xl md:text-5xl font-black mb-6 md:mb-8 leading-tight text-white">NelliPos: Control y Fuerza</h3>
+                        <p class="text-wcd-neutral text-base md:text-xl mb-8 md:mb-10 leading-relaxed font-light">
+                            Un sistema diseñado para el sector abarrotero que rompe con la complejidad. Ofrecemos el software intuitivo que tu operación necesita.
                         </p>
-                        <a href="https://proyectoadmitido.com/" target="_blank" class="text-wcd-orange font-extrabold hover:text-orange-600 flex items-center gap-3 text-lg transition-colors group-hover:gap-4">
-                            Visitar sitio oficial <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="reveal delay-200 bg-white rounded-3xl overflow-hidden shadow-2xl border border-gray-100 hover:shadow-3xl transition-all group hover:-translate-y-1">
-                    <div class="h-56 bg-wcd-medium relative flex items-center justify-center p-8 overflow-hidden">
-                        <div class="absolute inset-0 bg-wcd-light/10 opacity-40 stone-texture"></div>
-                        <h4 class="text-4xl font-black text-white z-10 tracking-tight text-glow">LogistycMX</h4>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-                    </div>
-                    <div class="p-10">
-                        <div class="flex items-center gap-3 mb-6">
-                            <span class="px-4 py-2 bg-wcd-light/30 text-wcd-dark text-xs font-extrabold rounded-full tracking-wider uppercase">E-Commerce B2B</span>
-                            <span class="px-4 py-2 bg-blue-100 text-blue-700 text-xs font-extrabold rounded-full tracking-wider uppercase">ERP Sync</span>
+                        <ul class="space-y-4 md:space-y-6 mb-8 md:mb-12 text-base md:text-lg">
+                            <li class="flex items-center gap-3 md:gap-4 reveal delay-100">
+                                <i class="fas fa-bolt text-xl md:text-2xl text-wcd-orange drop-shadow-lg min-w-[24px]"></i>
+                                <span class="font-semibold text-white">100% Intuitivo y Rápido</span>
+                            </li>
+                            <li class="flex items-center gap-3 md:gap-4 reveal delay-200">
+                                <i class="fas fa-users text-xl md:text-2xl text-wcd-orange drop-shadow-lg min-w-[24px]"></i>
+                                <span class="font-semibold text-white">Acompañamiento presencial total</span>
+                            </li>
+                            <li class="flex items-center gap-3 md:gap-4 reveal delay-300">
+                                <i class="fas fa-mobile-alt text-xl md:text-2xl text-wcd-orange drop-shadow-lg min-w-[24px]"></i>
+                                <span class="font-semibold text-white">Control en tiempo real de tu stock</span>
+                            </li>
+                        </ul>
+                        <div class="text-center bg-wcd-medium/20 p-4 md:p-6 rounded-2xl border border-wcd-light/20 relative">
+                            <p class="italic text-lg md:text-xl font-medium text-wcd-light">"No estás solo, tienes a NELLI"</p>
                         </div>
-                        <p class="text-gray-600 text-lg leading-relaxed mb-8 font-light">
-                            Sistema de e-commerce privado conectado directamente al ERP de la empresa. Permite sincronización de stock real, descripciones detalladas, gestión de cuentas y una interfaz de ventas amigable e intuitiva para tus clientes comerciales.
-                        </p>
-                        <a href="https://logistycmx.com/" target="_blank" class="text-wcd-orange font-extrabold hover:text-orange-600 flex items-center gap-3 text-lg transition-colors group-hover:gap-4">
-                            Visitar sitio oficial <i class="fas fa-arrow-right"></i>
-                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="servicios" class="py-24 bg-white relative">
+    <section id="portafolio" class="py-16 md:py-24 bg-wcd-neutral relative">
         <div class="stone-texture absolute inset-0 opacity-10"></div>
-        <div class="max-w-7xl mx-auto px-6 lg:px-8 text-center relative z-10">
-            <h3 class="text-5xl font-black text-wcd-darkest mb-16 leading-tight">Nuestros Servicios Integrales</h3>
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="reveal p-8 border-2 border-wcd-neutral rounded-2xl hover:border-wcd-medium transition-all group hover:bg-wcd-neutral/20 stone-texture">
-                    <i class="fas fa-laptop-code text-5xl text-wcd-medium mb-6 transition-transform group-hover:scale-110"></i>
-                    <h4 class="font-bold text-xl mb-3 text-wcd-darkest ancient">Desarrollo Web</h4>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-12 md:mb-16">
+                <h2 class="text-xs md:text-sm font-bold text-wcd-dark tracking-widest uppercase mb-2 md:mb-3 ancient">Desarrollo a Medida</h2>
+                <h3 class="text-4xl md:text-5xl font-black text-wcd-darkest">Historias de Éxito y Robustez</h3>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+                <div class="reveal bg-white rounded-3xl overflow-hidden shadow-xl border border-gray-100 hover:shadow-2xl transition-all group">
+                    <div class="h-48 md:h-56 bg-wcd-darkest relative flex items-center justify-center p-6 md:p-8 overflow-hidden">
+                        <div class="absolute inset-0 bg-wcd-light/10 opacity-40 stone-texture"></div>
+                        <h4 class="text-3xl md:text-4xl font-black text-white z-10 tracking-tight text-glow text-center">Proyecto Admitido</h4>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                    </div>
+                    <div class="p-6 md:p-10">
+                        <div class="flex flex-wrap gap-2 mb-4 md:mb-6">
+                            <span class="px-3 md:px-4 py-1.5 md:py-2 bg-wcd-light/30 text-wcd-dark text-[10px] md:text-xs font-extrabold rounded-full tracking-wider uppercase">E-Learning</span>
+                            <span class="px-3 md:px-4 py-1.5 md:py-2 bg-green-100 text-green-700 text-[10px] md:text-xs font-extrabold rounded-full tracking-wider uppercase">Mercado Pago</span>
+                        </div>
+                        <p class="text-gray-600 text-base md:text-lg leading-relaxed mb-6 md:mb-8 font-light">
+                            Una plataforma educativa integral con gestión académica total. Incluye pagos en línea, administración de lecciones, alumnos y estadísticas detalladas. Un entorno intuitivo donde los estudiantes acceden a su material 24/7.
+                        </p>
+                        <a href="https://proyectoadmitido.com/" target="_blank" class="text-wcd-orange font-extrabold hover:text-orange-600 flex items-center gap-2 md:gap-3 text-base md:text-lg transition-colors group-hover:gap-4">
+                            Visitar sitio oficial <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="reveal delay-100 md:delay-200 bg-white rounded-3xl overflow-hidden shadow-xl border border-gray-100 hover:shadow-2xl transition-all group">
+                    <div class="h-48 md:h-56 bg-wcd-medium relative flex items-center justify-center p-6 md:p-8 overflow-hidden">
+                        <div class="absolute inset-0 bg-wcd-light/10 opacity-40 stone-texture"></div>
+                        <h4 class="text-3xl md:text-4xl font-black text-white z-10 tracking-tight text-glow text-center">LogistycMX</h4>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                    </div>
+                    <div class="p-6 md:p-10">
+                        <div class="flex flex-wrap gap-2 mb-4 md:mb-6">
+                            <span class="px-3 md:px-4 py-1.5 md:py-2 bg-wcd-light/30 text-wcd-dark text-[10px] md:text-xs font-extrabold rounded-full tracking-wider uppercase">E-Commerce B2B</span>
+                            <span class="px-3 md:px-4 py-1.5 md:py-2 bg-blue-100 text-blue-700 text-[10px] md:text-xs font-extrabold rounded-full tracking-wider uppercase">ERP Sync</span>
+                        </div>
+                        <p class="text-gray-600 text-base md:text-lg leading-relaxed mb-6 md:mb-8 font-light">
+                            Sistema de e-commerce privado conectado directamente al ERP de la empresa. Permite sincronización de stock real, descripciones detalladas, gestión de cuentas y una interfaz de ventas amigable e intuitiva.
+                        </p>
+                        <a href="https://logistycmx.com/" target="_blank" class="text-wcd-orange font-extrabold hover:text-orange-600 flex items-center gap-2 md:gap-3 text-base md:text-lg transition-colors group-hover:gap-4">
+                            Visitar sitio oficial <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="servicios" class="py-16 md:py-24 bg-white relative">
+        <div class="stone-texture absolute inset-0 opacity-10"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <h3 class="text-4xl md:text-5xl font-black text-wcd-darkest mb-12 md:mb-16 leading-tight">Nuestros Servicios Integrales</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+                <div class="reveal p-6 md:p-8 border-2 border-wcd-neutral rounded-2xl hover:border-wcd-medium transition-all group hover:bg-wcd-neutral/20 stone-texture">
+                    <i class="fas fa-laptop-code text-4xl md:text-5xl text-wcd-medium mb-4 md:mb-6 transition-transform group-hover:scale-110"></i>
+                    <h4 class="font-bold text-lg md:text-xl mb-2 md:mb-3 text-wcd-darkest ancient">Desarrollo Web</h4>
                     <p class="text-gray-600 leading-relaxed font-light text-sm">Sitios estáticos, E-commerce y sistemas a medida que operan con precisión.</p>
                 </div>
-                <div class="reveal delay-100 p-8 border-2 border-wcd-neutral rounded-2xl hover:border-wcd-medium transition-all group hover:bg-wcd-neutral/20 stone-texture">
-                    <i class="fas fa-tools text-5xl text-wcd-medium mb-6 transition-transform group-hover:scale-110"></i>
-                    <h4 class="font-bold text-xl mb-3 text-wcd-darkest ancient">Mantenimiento PC</h4>
+                <div class="reveal delay-100 p-6 md:p-8 border-2 border-wcd-neutral rounded-2xl hover:border-wcd-medium transition-all group hover:bg-wcd-neutral/20 stone-texture">
+                    <i class="fas fa-tools text-4xl md:text-5xl text-wcd-medium mb-4 md:mb-6 transition-transform group-hover:scale-110"></i>
+                    <h4 class="font-bold text-lg md:text-xl mb-2 md:mb-3 text-wcd-darkest ancient">Mantenimiento PC</h4>
                     <p class="text-gray-600 leading-relaxed font-light text-sm">Limpieza, optimización y corrección de fallos a bajo costo para tu equipo.</p>
                 </div>
-                <div class="reveal delay-200 p-8 border-2 border-wcd-neutral rounded-2xl hover:border-wcd-medium transition-all group hover:bg-wcd-neutral/20 stone-texture">
-                    <i class="fas fa-hdd text-5xl text-wcd-medium mb-6 transition-transform group-hover:scale-110"></i>
-                    <h4 class="font-bold text-xl mb-3 text-wcd-darkest ancient">Actualización HW</h4>
+                <div class="reveal delay-100 lg:delay-200 p-6 md:p-8 border-2 border-wcd-neutral rounded-2xl hover:border-wcd-medium transition-all group hover:bg-wcd-neutral/20 stone-texture">
+                    <i class="fas fa-hdd text-4xl md:text-5xl text-wcd-medium mb-4 md:mb-6 transition-transform group-hover:scale-110"></i>
+                    <h4 class="font-bold text-lg md:text-xl mb-2 md:mb-3 text-wcd-darkest ancient">Actualización HW</h4>
                     <p class="text-gray-600 leading-relaxed font-light text-sm">Clonación de discos (cambio a SSD) para que tu equipo vuele.</p>
                 </div>
-                <div class="reveal delay-300 p-8 border-2 border-wcd-neutral rounded-2xl hover:border-wcd-medium transition-all group hover:bg-wcd-neutral/20 stone-texture">
-                    <i class="fas fa-network-wired text-5xl text-wcd-medium mb-6 transition-transform group-hover:scale-110"></i>
-                    <h4 class="font-bold text-xl mb-3 text-wcd-darkest ancient">Redes y Sistemas</h4>
+                <div class="reveal delay-100 lg:delay-300 p-6 md:p-8 border-2 border-wcd-neutral rounded-2xl hover:border-wcd-medium transition-all group hover:bg-wcd-neutral/20 stone-texture">
+                    <i class="fas fa-network-wired text-4xl md:text-5xl text-wcd-medium mb-4 md:mb-6 transition-transform group-hover:scale-110"></i>
+                    <h4 class="font-bold text-lg md:text-xl mb-2 md:mb-3 text-wcd-darkest ancient">Redes y Sistemas</h4>
                     <p class="text-gray-600 leading-relaxed font-light text-sm">Configuración de redes, Windows, Linux y paquetería profesional.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer class="bg-wcd-darkest text-wcd-neutral py-16 relative overflow-hidden gradient-border border-t-8">
+    <footer class="bg-wcd-darkest text-wcd-neutral py-12 md:py-16 relative overflow-hidden gradient-border border-t-8">
         <div class="hero-pattern absolute inset-0 opacity-10"></div>
         <div class="stone-texture absolute inset-0 opacity-5"></div>
-        <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-            <div class="grid md:grid-cols-3 gap-12 items-center text-center md:text-left">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12 items-center text-center md:text-left">
                 <div class="flex flex-col items-center md:items-start reveal">
-                    <div class="flex items-center gap-4 mb-6">
-                        <img src="ocelote.png" alt="Logo Ocelote" class="h-12 w-auto filter invert brightness-0 drop-shadow-[0_0_15px_rgba(251,133,0,0.5)]">
-                        <span class="font-black text-white text-3xl tracking-tighter">WCD</span>
+                    <div class="flex items-center gap-3 md:gap-4 mb-4 md:mb-6">
+                        <img src="ocelote.png" alt="Logo Ocelote" class="h-10 md:h-12 w-auto filter invert brightness-0 drop-shadow-[0_0_15px_rgba(251,133,0,0.5)]">
+                        <span class="font-black text-white text-2xl md:text-3xl tracking-tighter">WCD</span>
                     </div>
-                    <p class="text-lg font-light opacity-90 max-w-sm leading-relaxed">
-                        Diseñando el futuro tecnológico con cultura, esfuerzo y autenticidad Nahuatl.
+                    <p class="text-base md:text-lg font-light opacity-90 max-w-sm leading-relaxed px-4 md:px-0">
+                        Diseñando el futuro tecnológico con cultura, esfuerzo y autenticidad.
                     </p>
                 </div>
-                <div class="flex flex-col space-y-3 text-lg font-semibold reveal delay-200">
+                <div class="flex flex-col space-y-3 text-base md:text-lg font-semibold reveal delay-100 md:delay-200">
                     <a href="#inicio" class="hover:text-wcd-light transition-colors">Inicio</a>
                     <a href="#filosofia" class="hover:text-wcd-light transition-colors">Nuestra Filosofía</a>
                     <a href="#nellipos" class="hover:text-wcd-light transition-colors">NelliPos</a>
                     <a href="#portafolio" class="hover:text-wcd-light transition-colors">Casos de Éxito</a>
                 </div>
-                <div class="flex flex-col items-center md:items-end reveal delay-400">
-                    <p class="font-extrabold text-white text-xl mb-6 ancient">Atención Directa</p>
-                    <a href="https://wa.me/523324311250" target="_blank" class="flex items-center gap-4 bg-white/10 hover:bg-white/20 px-8 py-4 rounded-2xl transition-all shadow-2xl text-glow transform hover:scale-105">
-                        <i class="fab fa-whatsapp text-3xl text-green-400"></i>
-                        <div>
-                            <p class="text-xs text-wcd-light m-0 font-bold uppercase tracking-wider">Escríbenos</p>
-                            <p class="font-black text-2xl text-white m-0 tracking-tight">(33) 2431 1250</p>
+                <div class="flex flex-col items-center md:items-end reveal delay-200 md:delay-400">
+                    <p class="font-extrabold text-white text-lg md:text-xl mb-4 md:mb-6 ancient">Atención Directa</p>
+                    <a href="https://wa.me/523324311250" target="_blank" class="flex items-center gap-3 md:gap-4 bg-white/10 hover:bg-white/20 px-6 py-3 md:px-8 md:py-4 rounded-2xl transition-all shadow-xl md:shadow-2xl text-glow transform hover:scale-105 w-full sm:w-auto justify-center">
+                        <i class="fab fa-whatsapp text-2xl md:text-3xl text-green-400"></i>
+                        <div class="text-left">
+                            <p class="text-[10px] md:text-xs text-wcd-light m-0 font-bold uppercase tracking-wider">Escríbenos</p>
+                            <p class="font-black text-xl md:text-2xl text-white m-0 tracking-tight">(33) 2431 1250</p>
                         </div>
                     </a>
                 </div>
             </div>
-            <div class="mt-16 pt-10 border-t border-wcd-dark/40 text-center text-sm opacity-70 flex flex-col items-center reveal delay-600">
+            <div class="mt-12 md:mt-16 pt-8 md:pt-10 border-t border-wcd-dark/40 text-center text-xs md:text-sm opacity-70 flex flex-col items-center reveal delay-300 md:delay-600">
                 <p>&copy; 2026 WCD / NELLI. Todos los derechos reservados.</p>
-                <img src="ocelote.png" alt="Ocelotl Guardián" class="h-8 mt-5 opacity-40 filter invert brightness-0">
+                <img src="ocelote.png" alt="Ocelotl Guardián" class="h-6 md:h-8 mt-4 md:mt-5 opacity-40 filter invert brightness-0">
             </div>
         </div>
     </footer>
